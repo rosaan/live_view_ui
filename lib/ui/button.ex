@@ -1,5 +1,7 @@
 defmodule Button do
-  @moduledoc false
+  @moduledoc """
+  A simple button component.
+  """
   use Phoenix.Component
   use CVA.Component
 

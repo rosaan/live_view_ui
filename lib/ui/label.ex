@@ -1,5 +1,7 @@
 defmodule Label do
-  @moduledoc false
+  @moduledoc """
+  A simple label component.
+  """
   use Phoenix.Component
 
   import LiveViewUI

@@ -1,5 +1,7 @@
 defmodule Input do
-  @moduledoc false
+  @moduledoc """
+  A simple input component.
+  """
   use Phoenix.Component
   use CVA.Component
 

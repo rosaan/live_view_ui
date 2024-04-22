@@ -1,5 +1,7 @@
 defmodule AlertDialog do
-  @moduledoc false
+  @moduledoc """
+  A simple alert dialog component.
+  """
   use Phoenix.Component
 
   import LiveViewUI

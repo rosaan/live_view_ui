@@ -1,5 +1,7 @@
 defmodule Error do
-  @moduledoc false
+  @moduledoc """
+  A simple error component.
+  """
   use Phoenix.Component
 
   slot(:inner_block, required: true)

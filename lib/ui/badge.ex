@@ -1,5 +1,7 @@
 defmodule Badge do
-  @moduledoc false
+  @moduledoc """
+  A simple badge component.
+  """
   use Phoenix.Component
   use CVA.Component
 

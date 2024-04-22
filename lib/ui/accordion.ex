@@ -1,5 +1,7 @@
 defmodule Accordion do
-  @moduledoc false
+  @moduledoc """
+  A simple accordion component.
+  """
   use Phoenix.Component
 
   import LiveViewUI

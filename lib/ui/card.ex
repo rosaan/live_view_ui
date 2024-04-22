@@ -1,5 +1,7 @@
 defmodule Card do
-  @moduledoc false
+  @moduledoc """
+  A simple card component.
+  """
   use Phoenix.Component
 
   import LiveViewUI

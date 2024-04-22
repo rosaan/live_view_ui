@@ -1,5 +1,7 @@
 defmodule Alert do
-  @moduledoc false
+  @moduledoc """
+  A simple alert component.
+  """
   use Phoenix.Component
   use CVA.Component
 
