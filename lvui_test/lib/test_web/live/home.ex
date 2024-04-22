@@ -4,6 +4,9 @@ defmodule TestWeb.HomeLive do
   def render(assigns) do
     ~H"""
     <div class="space-y-4">
+    <Button.root>
+      <.link navigate={~p"/empty"}>Navigate to Empty Page</.link>
+    </Button.root>
       <Card.root>
         <Card.header>
           <Card.title>
@@ -38,7 +41,7 @@ defmodule TestWeb.HomeLive do
           <Accordion.root>
             <Accordion.item id="1">
               <Accordion.trigger>
-                  Accordion Item 1
+                  Accordion Item 1 <%= @accordion_title %>
               </Accordion.trigger>
               <Accordion.content>
                 <p>
@@ -57,6 +60,9 @@ defmodule TestWeb.HomeLive do
               </Accordion.content>
             </Accordion.item>
           </Accordion.root>
+          <Card.footer>
+            <Button.root phx-click="update-title">Update Title</Button.root>
+          </Card.footer>
         </Card.content>
       </Card.root>
     </div>
@@ -64,6 +70,11 @@ defmodule TestWeb.HomeLive do
   end
 
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok, socket |> assign(accordion_title: "Default")}
+  end
+
+  def handle_event("update-title", _payload, socket) do
+    random_names = ["John", "Doe", "Jane", "Smith"]
+    {:noreply, socket |> assign(accordion_title: Enum.random(random_names))}
   end
 end

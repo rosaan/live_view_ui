@@ -10,6 +10,9 @@
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
+    <script type="module">
+      import preline from 'https://cdn.jsdelivr.net/npm/preline@2.1.0/+esm'
+    </script>
   </head>
   <body class="antialiased">
     <%= @inner_content %>

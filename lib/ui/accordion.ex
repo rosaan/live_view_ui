@@ -19,6 +19,7 @@ defmodule Accordion do
     """
   end
 
+  attr :id, :string, required: true
   attr :active, :boolean, default: false
   attr :disabled, :boolean, default: false
   attr :class, :any, default: nil
@@ -28,7 +29,7 @@ defmodule Accordion do
   def item(assigns) do
     ~H"""
     <div
-      id={"accordion-item-#{unique_id()}"}
+      id={"accordion-item-#{@id}"}
       phx-hook="Accordion"
       class={cn(["hs-accordion", if(@active, do: "active", else: ""), @class])}
       {@rest}
