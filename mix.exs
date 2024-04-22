@@ -18,6 +18,9 @@ defmodule LiveViewUI.MixProject do
         main: "LiveView UI",
         extras: ["README.md"]
       ],
+      description: """
+        A collection of UI components for Phoenix LiveView.
+      """,
       package: package()
     ]
   end
