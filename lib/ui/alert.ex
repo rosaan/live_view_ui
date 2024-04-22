@@ -11,10 +11,11 @@ defmodule Alert do
     :variant,
     [
       default: "bg-background text-foreground",
-      warning:
-        "bg-amber-50 dark:bg-amber-950 text-amber-900 dark:text-amber-100 border-amber-300 dark:border-amber-700 [&>svg]:text-amber-900 [&>svg]:stroke-amber-900 dark:[&>svg]:stroke-amber-100 dark:[&>svg]:text-amber-100",
-      destructive:
-        "bg-background border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive [&>svg]:stroke-destructive"
+      warning: ~s"bg-amber-50 dark:bg-amber-950 text-amber-900 dark:text-amber-100
+        border-amber-300 dark:border-amber-700 [&>svg]:text-amber-900
+        [&>svg]:stroke-amber-900 dark:[&>svg]:stroke-amber-100 dark:[&>svg]:text-amber-100",
+      destructive: ~s"bg-background border-destructive/50 text-destructive dark:border-destructive
+        [&>svg]:text-destructive [&>svg]:stroke-destructive"
     ],
     default: :default
   )
@@ -29,7 +30,8 @@ defmodule Alert do
       role="alert"
       class={
         cn([
-          "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-1px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
+          ~s"relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-1px]
+          [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
           @cva_class,
           @class
         ])

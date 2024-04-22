@@ -198,9 +198,9 @@ defmodule Input do
 
   def translate_error({msg, opts}) do
     if count = opts[:count] do
-      Gettext.dngettext(LoyaltyWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(LiveViewUI.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(LoyaltyWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(LiveViewUI.Gettext, "errors", msg, opts)
     end
   end
 end
