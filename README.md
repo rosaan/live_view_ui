@@ -232,7 +232,8 @@ If you want to support dark mode, you need to add the following code to your `ro
   <body
     class="h-full relative antialiased bg-background [scrollbar-gutter:stable]"
   >
-    <-- make sure to add the bg-background class <%= @inner_content %>
+    <%= @inner_content %>
+
     <!-- Add this script -->
     <script>
       const e =
