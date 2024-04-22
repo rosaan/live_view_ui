@@ -17,7 +17,8 @@ defmodule LiveViewUI.MixProject do
       docs: [
         main: "LiveView UI",
         extras: ["README.md"]
-      ]
+      ],
+      package: package()
     ]
   end
 
@@ -44,6 +45,19 @@ defmodule LiveViewUI.MixProject do
 
       # Formatting
       {:styler, "~> 0.11", only: [:dev, :test], runtime: false}
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["Rosaan Ramasamy"],
+      licenses: ["MIT"],
+      links: %{
+        GitHub: "https://github.com/rosaan/live_view_ui"
+      },
+      files:
+        ~w(lib) ++
+          ~w(LICENSE.md mix.exs README.md .formatter.exs)
     ]
   end
 end

@@ -10,7 +10,7 @@ by adding `live_view_ui` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:live_view_ui, "~> 0.1.0"}
+    {:live_view_ui, "~> 0.0.1"}
   ]
 end
 ```
