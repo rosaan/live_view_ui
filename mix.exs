@@ -42,6 +42,7 @@ defmodule LiveViewUI.MixProject do
       {:lucide_live_view, "~> 0.1.0"},
       {:tails, "~> 0.1.10"},
       {:cva, "~> 0.2"},
+      {:gettext, "~> 0.20"},
 
       # Docs
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
