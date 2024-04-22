@@ -23,10 +23,25 @@ import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import topbar from "../vendor/topbar";
 
-let csrfToken = document
+const Hooks = {
+  ThemeSwitcher: {
+    mounted() {
+      this.el.addEventListener("click", () => {
+        const theme = localStorage.getItem("theme") ?? "light";
+        const newTheme = theme === "dark" ? "light" : "dark";
+
+        document.documentElement.classList.toggle("dark", newTheme === "dark");
+        localStorage.setItem("theme", newTheme);
+      });
+    },
+  },
+};
+
+const csrfToken = document
   .querySelector("meta[name='csrf-token']")
   .getAttribute("content");
-let liveSocket = new LiveSocket("/live", Socket, {
+const liveSocket = new LiveSocket("/live", Socket, {
+  hooks: Hooks,
   longPollFallbackMs: 2500,
   params: { _csrf_token: csrfToken },
 });

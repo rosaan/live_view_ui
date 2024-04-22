@@ -53,7 +53,8 @@ defmodule Test.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
       {
-        :live_view_ui, path: "../",
+        :live_view_ui,
+        path: "../"
       }
     ]
   end
