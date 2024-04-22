@@ -3,7 +3,7 @@ defmodule Button do
   use Phoenix.Component
   use CVA.Component
 
-  import UI.Utils
+  import LiveViewUI
 
   @button_variant_config [
     default: "bg-primary text-primary-foreground hover:bg-primary/90",

@@ -2,7 +2,7 @@ defmodule Card do
   @moduledoc false
   use Phoenix.Component
 
-  import UI.Utils
+  import LiveViewUI
 
   attr(:class, :any, default: nil)
   attr(:rest, :global)

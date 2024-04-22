@@ -1,4 +1,4 @@
-defmodule UI.Utils do
+defmodule LiveViewUI do
   @moduledoc false
   def cn(classes) do
     classes |> Enum.filter(fn x -> x != true and x != false end) |> Tails.merge() |> to_string()

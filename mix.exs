@@ -15,7 +15,7 @@ defmodule LiveViewUI.MixProject do
       name: "LiveView UI",
       source_url: "https://github.com/rosaan/live_view_ui",
       docs: [
-        main: "LiveView UI",
+        main: "readme",
         extras: ["README.md"]
       ],
       description: """

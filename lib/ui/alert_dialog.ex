@@ -2,7 +2,7 @@ defmodule AlertDialog do
   @moduledoc false
   use Phoenix.Component
 
-  import UI.Utils
+  import LiveViewUI
 
   @doc """
   Renders an alert dialog

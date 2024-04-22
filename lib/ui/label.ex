@@ -2,7 +2,7 @@ defmodule Label do
   @moduledoc false
   use Phoenix.Component
 
-  import UI.Utils
+  import LiveViewUI
 
   attr(:for, :string, required: true)
   attr(:class, :any, default: nil)

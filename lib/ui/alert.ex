@@ -3,7 +3,7 @@ defmodule Alert do
   use Phoenix.Component
   use CVA.Component
 
-  import UI.Utils
+  import LiveViewUI
 
   variant(
     :variant,

@@ -2,7 +2,7 @@ defmodule Accordion do
   @moduledoc false
   use Phoenix.Component
 
-  import UI.Utils
+  import LiveViewUI
 
   attr :multiple, :boolean, default: false
   attr :class, :any, default: nil

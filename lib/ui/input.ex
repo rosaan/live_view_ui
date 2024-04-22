@@ -3,7 +3,7 @@ defmodule Input do
   use Phoenix.Component
   use CVA.Component
 
-  import UI.Utils
+  import LiveViewUI
 
   attr(:id, :any, default: nil)
   attr(:name, :any)
@@ -16,9 +16,7 @@ defmodule Input do
                range radio search select tel text textarea time url week url-slug)
   )
 
-  attr(:field, Phoenix.HTML.FormField,
-    doc: "a form field struct retrieved from the form, for example: @form[:email]"
-  )
+  attr(:field, Phoenix.HTML.FormField, doc: "a form field struct retrieved from the form, for example: @form[:email]")
 
   attr(:errors, :list, default: [])
   attr(:checked, :boolean, doc: "the checked flag for checkbox inputs")
@@ -27,10 +25,8 @@ defmodule Input do
   attr(:multiple, :boolean, default: false, doc: "the multiple flag for select inputs")
   attr(:class, :any, default: nil)
 
-  attr(:rest, :global,
-    include: ~w(accept autocomplete capture cols disabled form list max maxlength min minlength
-                multiple pattern placeholder readonly required rows size step)
-  )
+  attr(:rest, :global, include: ~w(accept autocomplete capture cols disabled form list max maxlength min minlength
+                multiple pattern placeholder readonly required rows size step))
 
   slot(:inner_block)
 
