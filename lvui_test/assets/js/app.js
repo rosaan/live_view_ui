@@ -17,52 +17,20 @@
 
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html";
-import "preline";
-import { HSStaticMethods } from "preline";
+import { hooks, dom } from "../../../assets/app";
 // Establish Phoenix Socket and LiveView configuration.
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import topbar from "../vendor/topbar";
 
-const Hooks = {
-  ThemeSwitcher: {
-    mounted() {
-      this.el.addEventListener("click", () => {
-        const theme = localStorage.getItem("theme") ?? "light";
-        const newTheme = theme === "dark" ? "light" : "dark";
-
-        document.documentElement.classList.toggle("dark", newTheme === "dark");
-        localStorage.setItem("theme", newTheme);
-      });
-    },
-  },
-  Accordion: {
-    mounted() {
-      HSStaticMethods.autoInit(["accordion"]);
-    },
-    updated() {
-      HSStaticMethods.autoInit(["accordion"]);
-    },
-    destroyed() {
-      this.el.remove();
-    },
-  },
-};
-
 const csrfToken = document
   .querySelector("meta[name='csrf-token']")
   .getAttribute("content");
 const liveSocket = new LiveSocket("/live", Socket, {
-  hooks: Hooks,
+  hooks,
   longPollFallbackMs: 2500,
   params: { _csrf_token: csrfToken },
-  dom: {
-    onBeforeElUpdated(fromEl, toEl) {
-      if (fromEl.classList.contains("hs-accordion")) {
-        toEl.className = fromEl.className;
-      }
-    },
-  },
+  dom,
 });
 
 // Show progress bar on live navigation and form submits

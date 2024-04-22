@@ -13,7 +13,9 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      colors: require("./tailwind.colors.json"),
+      colors: {
+        ...require("../../assets/tailwind.colors.json"),
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -37,7 +39,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/forms"),
-    require("preline/plugin"),
+    require("../../assets/preline/plugin"),
     // Allows prefixing tailwind classes with LiveView classes to add rules
     // only when LiveView classes are applied, for example:
     //
