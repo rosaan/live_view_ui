@@ -203,7 +203,7 @@ Refer to the [shadcn/ui Themes](https://ui.shadcn.com/themes) to customize the c
 Ensure that your `app.js` is configured to utilize LiveView hooks and DOM operations from the UI library:
 
 ```javascript
-import { Hooks, dom } from "../deps/live_view_ui/assets/preline/app"; // <-- Add this line
+import { hooks, dom } from "../../deps/live_view_ui/assets/app"; // <-- Add this line
 
 const liveSocket = new LiveSocket("/live", Socket, {
   hooks, // <-- Add this line
@@ -220,6 +220,31 @@ const liveSocket = new LiveSocket("/live", Socket, {
    ```
 
 2. Change the Gettext module in `./lib/ui/input.ex` to match your project's Gettext module.
+
+## Step 6: For dark mode support
+
+If you want to support dark mode, you need to add the following code to your `root.html.heex`:
+
+```html
+<!DOCTYPE html>
+<html lang="en" class="[scrollbar-gutter:stable] h-full">
+  <!-- Make sure to add the bg-background class and other utility classes. If there is other bg- class, you can remove it -->
+  <body
+    class="h-full relative antialiased bg-background [scrollbar-gutter:stable]"
+  >
+    <-- make sure to add the bg-background class <%= @inner_content %>
+    <!-- Add this script -->
+    <script>
+      const e =
+        localStorage.getItem("theme") ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light");
+      document.documentElement.classList.toggle("dark", "dark" === e);
+    </script>
+  </body>
+</html>
+```
 
 # Acknowledgements
 
