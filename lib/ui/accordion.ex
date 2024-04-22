@@ -1,6 +1,37 @@
 defmodule Accordion do
   @moduledoc """
-  A simple accordion component.
+  A simple accordion component for dynamically displaying collapsible content panels.
+
+  ## Example Usage
+
+  Here is a basic example of setting up an accordion with two items:
+
+  ```elixir
+  <Accordion.root>
+    <Accordion.item id="item-1">
+      <Accordion.trigger>
+        Accordion Item 1
+      </Accordion.trigger>
+      <Accordion.content>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc.
+        </p>
+      </Accordion.content>
+    </Accordion.item>
+    <Accordion.item id="item-2">
+      <Accordion.trigger>
+        Accordion Item 2
+      </Accordion.trigger>
+      <Accordion.content>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc.
+        </p>
+      </Accordion.content>
+    </Accordion.item>
+  </Accordion.root>
+  ```
+
+  This structure allows you to toggle visibility of each content panel, providing a streamlined user experience.
   """
   use Phoenix.Component
 
