@@ -39,7 +39,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/forms"),
-    require("../../assets/preline/plugin"),
+    require("live_view_ui/tailwind"),
     // Allows prefixing tailwind classes with LiveView classes to add rules
     // only when LiveView classes are applied, for example:
     //

@@ -1,0 +1,15 @@
+{
+    "name": "live_view_ui",
+    "version": "0.0.2",
+    "module": "./priv/static/live_view_ui.mjs",
+    "exports": {
+        ".": "./priv/static/live_view_ui.mjs",
+        "./tailwind": "./priv/static/plugin.js"
+    },
+    "files": [
+        "README.md",
+        "LICENSE",
+        "package.json",
+        "priv/static/*"
+    ]
+}

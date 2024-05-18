@@ -44,6 +44,7 @@ defmodule LiveViewUI.MixProject do
       {:tails, "~> 0.1.10"},
       {:cva, "~> 0.2"},
       {:gettext, "~> 0.20"},
+      {:esbuild, "~> 0.8.1"},
 
       # Docs
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
@@ -61,8 +62,8 @@ defmodule LiveViewUI.MixProject do
         GitHub: "https://github.com/rosaan/live_view_ui"
       },
       files:
-        ~w(lib assets priv) ++
-          ~w(LICENSE.md mix.exs README.md .formatter.exs)
+        ~w(lib/mix priv) ++
+          ~w(LICENSE.md mix.exs README.md .formatter.exs package.json)
     ]
   end
 
@@ -70,7 +71,13 @@ defmodule LiveViewUI.MixProject do
     [
       prepublish: ["cp -r lib/ui priv/ui"],
       publish: ["mix prepublish", "mix hex.publish"],
-      "publish:replace": ["mix prepublish", "mix hex.publish package"]
+      "publish:replace": ["mix prepublish", "mix hex.publish package"],
+      "assets.build": [
+        "cmd --cd priv rm -rf static/",
+        "esbuild default",
+        "cmd cp ./assets/node_modules/preline/plugin.js ./priv/static/plugin.js"
+      ],
+      "assets.watch": ["esbuild default --watch"]
     ]
   end
 end

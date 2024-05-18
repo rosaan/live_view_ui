@@ -24,7 +24,7 @@ defmodule Mix.Tasks.Lvui.Setup do
     patterns = [
       {~r/content:\s*\[/, "\"../lib/ui/**/*.ex\","},
       {~r/module.exports\s*=\s*\{/, "darkMode: \"class\","},
-      {~r/plugins:\s*\[/, "require(\"../deps/live_view_ui/assets/preline/plugin\"),"}
+      {~r/plugins:\s*\[/, "require(\"live_view_ui/tailwind\"),"}
     ]
 
     inject_patterns(file, patterns)
@@ -42,7 +42,7 @@ defmodule Mix.Tasks.Lvui.Setup do
     file = "assets/js/app.js"
 
     js_lines = [
-      {~r/^/, "import { hooks, dom } from \"../../deps/live_view_ui/assets/app\";\n"},
+      {~r/^/, "import { hooks, dom } from \"live_view_ui\";\n"},
       {~r/let\s+liveSocket\s*=\s*new\s+LiveSocket\(".*",\s*Socket,\s*\{/, "  hooks,"},
       {~r/let\s+liveSocket\s*=\s*new\s+LiveSocket\(".*",\s*Socket,\s*\{/, "  dom,"}
     ]

@@ -26,3 +26,5 @@ live_view_ui-*.tar
 /tmp/
 
 .elixir_ls
+
+node_modules
