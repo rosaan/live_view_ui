@@ -1,6 +1,6 @@
 {
     "name": "live_view_ui",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "module": "./priv/static/live_view_ui.mjs",
     "exports": {
         ".": "./priv/static/live_view_ui.mjs",
