@@ -10,6 +10,7 @@ defmodule LiveViewUI.MixProject do
       elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      aliases: aliases(),
 
       # Docs
       name: "LiveViewUI",
@@ -60,8 +61,16 @@ defmodule LiveViewUI.MixProject do
         GitHub: "https://github.com/rosaan/live_view_ui"
       },
       files:
-        ~w(lib assets) ++
+        ~w(lib assets priv) ++
           ~w(LICENSE.md mix.exs README.md .formatter.exs)
+    ]
+  end
+
+  defp aliases do
+    [
+      prepublish: ["cp -r lib/ui priv/ui"],
+      publish: ["mix prepublish", "mix hex.publish"],
+      "publish:replace": ["mix prepublish", "mix hex.publish package"]
     ]
   end
 end

@@ -1,0 +1,177 @@
+defmodule Mix.Tasks.Lvui.Setup do
+  @shortdoc "Sets up LiveViewUI in your Phoenix project"
+  @moduledoc false
+  use Mix.Task
+
+  def run(_) do
+    Mix.shell().info("Welcome to the LiveViewUI setup!")
+
+    inject_tailwind_config()
+    update_app_css()
+    modify_app_js()
+    copy_ui_components()
+    add_dark_mode_support()
+
+    Mix.shell().info("LiveViewUI setup complete!")
+
+    # Run mix format
+    Mix.Task.run("format")
+  end
+
+  defp inject_tailwind_config do
+    file = "assets/tailwind.config.js"
+
+    patterns = [
+      {~r/content:\s*\[/, "\"../lib/ui/**/*.ex\","},
+      {~r/module.exports\s*=\s*\{/, "darkMode: \"class\","},
+      {~r/plugins:\s*\[/, "require(\"../deps/live_view_ui/assets/preline/plugin\"),"}
+    ]
+
+    inject_patterns(file, patterns)
+    inject_colors(file)
+  end
+
+  defp update_app_css do
+    file = "assets/css/app.css"
+    styles_dir = Application.app_dir(:live_view_ui, "priv/styles.css")
+    styles = File.read!(styles_dir)
+    inject_line(file, ~r/\z/, styles)
+  end
+
+  defp modify_app_js do
+    file = "assets/js/app.js"
+
+    js_lines = [
+      {~r/^/, "import { hooks, dom } from \"../../deps/live_view_ui/assets/app\";\n"},
+      {~r/let\s+liveSocket\s*=\s*new\s+LiveSocket\(".*",\s*Socket,\s*\{/, "  hooks,"},
+      {~r/let\s+liveSocket\s*=\s*new\s+LiveSocket\(".*",\s*Socket,\s*\{/, "  dom,"}
+    ]
+
+    inject_patterns(file, js_lines)
+  end
+
+  defp copy_ui_components do
+    ui_dir = Application.app_dir(:live_view_ui, "priv/ui")
+    current_ui_dir = Path.join(["lib", "ui"])
+    Mix.shell().info("Copying UI components...")
+    File.cp_r!(ui_dir, current_ui_dir)
+    Mix.shell().info("UI components copied.")
+  end
+
+  defp add_dark_mode_support do
+    otp_app = Mix.Phoenix.context_app()
+    file = "lib/#{otp_app}_web/components/layouts/root.html.heex"
+
+    script = """
+    <script>
+      const e = localStorage.getItem("theme") ||
+                (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.classList.toggle("dark", "dark" === e);
+    </script>
+    """
+
+    inject_line(file, ~r/<\/body>/, script, :before)
+  end
+
+  defp inject_colors(file) do
+    if File.exists?(file) do
+      contents = File.read!(file)
+
+      new_contents =
+        contents
+        |> ensure_pattern(~r/theme:\s*\{/, "  theme: {},")
+        |> ensure_pattern(~r/extend:\s*\{/, "    extend: {},")
+        |> ensure_colors()
+
+      File.write!(file, new_contents)
+      Mix.shell().info("TailwindCSS colors configuration updated.")
+    else
+      Mix.shell().info("#{file} not found. Skipping colors injection.")
+    end
+  end
+
+  defp ensure_pattern(contents, pattern, line) do
+    if Regex.match?(pattern, contents) do
+      contents
+    else
+      Regex.replace(~r/(module.exports\s*=\s*\{)([^}]*)\}/, contents, "\\1\n#{line}\\2}")
+    end
+  end
+
+  defp ensure_colors(contents) do
+    color_pattern = ~r/require\("\.\.\/deps\/live_view_ui\/assets\/tailwind\.colors\.json"\)/
+
+    if Regex.match?(color_pattern, contents) do
+      contents
+    else
+      if Regex.match?(~r/colors:\s*\{/, contents) do
+        Regex.replace(
+          ~r/(colors:\s*\{)([^}]*)\}/,
+          contents,
+          "\\1\n        ...require(\"../deps/live_view_ui/assets/tailwind.colors.json\"),\\2}"
+        )
+      else
+        Regex.replace(
+          ~r/(extend:\s*\{)([^}]*)\}/,
+          contents,
+          "\\1\n      colors: {\n        ...require(\"../deps/live_view_ui/assets/tailwind.colors.json\")\n      },\\2}"
+        )
+      end
+    end
+  end
+
+  defp inject_patterns(file, patterns) do
+    Enum.each(patterns, fn {pattern, line} ->
+      inject_line(file, pattern, line)
+    end)
+  end
+
+  defp inject_line(file, pattern, line, position \\ :after) do
+    if File.exists?(file) do
+      contents = File.read!(file)
+
+      if Regex.match?(pattern, contents) do
+        if String.contains?(contents, line) do
+          Mix.shell().info("Code content already present in #{file}. Skipping.")
+        else
+          new_contents =
+            case position do
+              :after -> Regex.replace(pattern, contents, "\\0\n#{line}")
+              :before -> Regex.replace(pattern, contents, "#{line}\n\\0")
+            end
+
+          File.write!(file, new_contents)
+        end
+      else
+        Mix.shell().info("Pattern not found in #{file}.")
+
+        message = """
+        Unable to automatically inject the code.
+        Please manually add the following line to the appropriate section in #{file}:
+        #{line}
+        """
+
+        Mix.shell().info(box_around(message))
+      end
+    else
+      Mix.shell().info("#{file} not found. Skipping.")
+    end
+  end
+
+  defp box_around(message) do
+    lines = String.split(message, "\n")
+    padded_lines = Enum.map(lines, &("  " <> &1))
+    max_length_with_padding = padded_lines |> Enum.max_by(&String.length/1) |> String.length()
+    border = String.duplicate("─", max_length_with_padding + 2)
+
+    top_border = "┌#{border}┐"
+    bottom_border = "└#{border}┘"
+    middle = Enum.map_join(padded_lines, "\n", fn line -> "│ #{String.pad_trailing(line, max_length_with_padding)} │" end)
+
+    """
+    #{top_border}
+    #{middle}
+    #{bottom_border}
+    """
+  end
+end
