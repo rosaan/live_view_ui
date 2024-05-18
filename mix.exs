@@ -62,7 +62,7 @@ defmodule LiveViewUI.MixProject do
         GitHub: "https://github.com/rosaan/live_view_ui"
       },
       files:
-        ~w(lib/mix priv) ++
+        ~w(lib priv) ++
           ~w(LICENSE.md mix.exs README.md .formatter.exs package.json)
     ]
   end
