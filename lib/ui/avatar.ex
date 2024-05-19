@@ -1,4 +1,4 @@
-defmodule LiveViewUI.Avatar do
+defmodule LiveViewUI.UI.Avatar do
   @moduledoc """
   A simple avatar component for displaying user profile images with optional fallbacks.
 
@@ -20,7 +20,7 @@ defmodule LiveViewUI.Avatar do
   use Phoenix.Component
   use CVA.Component
 
-  import LiveViewUI.Helper
+  import LiveViewUI.UI.Helper
 
   attr :id, :string, required: true
   attr :class, :any, default: nil

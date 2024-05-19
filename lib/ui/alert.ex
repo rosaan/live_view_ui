@@ -1,4 +1,4 @@
-defmodule LiveViewUI.Alert do
+defmodule LiveViewUI.UI.Alert do
   @moduledoc """
   A simple alert component for displaying important messages.
 
@@ -21,7 +21,7 @@ defmodule LiveViewUI.Alert do
   use Phoenix.Component
   use CVA.Component
 
-  import LiveViewUI.Helper
+  import LiveViewUI.UI.Helper
 
   variant(
     :variant,

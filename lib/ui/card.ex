@@ -1,4 +1,4 @@
-defmodule LiveViewUI.Card do
+defmodule LiveViewUI.UI.Card do
   @moduledoc """
   A simple card component for displaying content within a bordered and rounded container.
 
@@ -27,37 +27,37 @@ defmodule LiveViewUI.Card do
 
   ## Components
 
-  - `LiveViewUI.Card.root` - The main container for the card.
-  - `LiveViewUI.Card.header` - The header section of the card.
-  - `LiveViewUI.Card.title` - The title element within the card header.
-  - `LiveViewUI.Card.description` - The description element within the card header.
-  - `LiveViewUI.Card.content` - The content section of the card.
-  - `LiveViewUI.Card.footer` - The footer section of the card.
+  - `LiveViewUI.UI.Card.root` - The main container for the card.
+  - `LiveViewUI.UI.Card.header` - The header section of the card.
+  - `LiveViewUI.UI.Card.title` - The title element within the card header.
+  - `LiveViewUI.UI.Card.description` - The description element within the card header.
+  - `LiveViewUI.UI.Card.content` - The content section of the card.
+  - `LiveViewUI.UI.Card.footer` - The footer section of the card.
 
   ## Attributes
 
-  ### `LiveViewUI.Card.root`
+  ### `LiveViewUI.UI.Card.root`
   - `:class` - Additional CSS classes to apply to the card.
   - `:rest` - Any additional attributes to apply to the card's root element.
 
-  ### `LiveViewUI.Card.header`
+  ### `LiveViewUI.UI.Card.header`
   - `:class` - Additional CSS classes to apply to the header.
   - `:rest` - Any additional attributes to apply to the header's root element.
 
-  ### `LiveViewUI.Card.title`
+  ### `LiveViewUI.UI.Card.title`
   - `:class` - Additional CSS classes to apply to the title.
   - `:rest` - Any additional attributes to apply to the title's root element.
 
-  ### `LiveViewUI.Card.description`
+  ### `LiveViewUI.UI.Card.description`
   - `:class` - Additional CSS classes to apply to the description.
   - `:rest` - Any additional attributes to apply to the description's root element.
 
-  ### `LiveViewUI.Card.content`
+  ### `LiveViewUI.UI.Card.content`
   - `:no_header` - A boolean to specify if the content should have padding at the top. Default is `false`.
   - `:class` - Additional CSS classes to apply to the content.
   - `:rest` - Any additional attributes to apply to the content's root element.
 
-  ### `LiveViewUI.Card.footer`
+  ### `LiveViewUI.UI.Card.footer`
   - `:class` - Additional CSS classes to apply to the footer.
   - `:rest` - Any additional attributes to apply to the footer's root element.
 
@@ -67,7 +67,7 @@ defmodule LiveViewUI.Card do
   """
   use Phoenix.Component
 
-  import LiveViewUI.Helper
+  import LiveViewUI.UI.Helper
 
   attr(:class, :any, default: nil)
   attr(:rest, :global)

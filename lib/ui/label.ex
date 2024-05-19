@@ -1,10 +1,10 @@
-defmodule LiveViewUI.Label do
+defmodule LiveViewUI.UI.Label do
   @moduledoc """
   A simple label component.
   """
   use Phoenix.Component
 
-  import LiveViewUI.Helper
+  import LiveViewUI.UI.Helper
 
   attr(:for, :string, required: true)
   attr(:class, :any, default: nil)

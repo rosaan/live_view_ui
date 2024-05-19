@@ -1,4 +1,4 @@
-defmodule LiveViewUI.Button do
+defmodule LiveViewUI.UI.Button do
   @moduledoc """
   A simple button component for interactive actions.
 
@@ -47,7 +47,7 @@ defmodule LiveViewUI.Button do
   use Phoenix.Component
   use CVA.Component
 
-  import LiveViewUI.Helper
+  import LiveViewUI.UI.Helper
 
   @button_variant_config [
     default: "bg-primary text-primary-foreground hover:bg-primary/90",

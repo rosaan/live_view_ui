@@ -179,7 +179,7 @@ defmodule Mix.Tasks.LiveViewUi.Setup do
     pattern = ~r/import Config/
 
     line = """
-    config :tails, colors_file: Path.join(File.cwd!(), "assets/tailwind.colors.json")
+    \nconfig :tails, colors_file: Path.join(File.cwd!(), "assets/tailwind.colors.json")
     """
 
     inject_line(file, pattern, line, :after)

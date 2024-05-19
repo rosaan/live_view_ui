@@ -1,4 +1,4 @@
-defmodule LiveViewUI.Badge do
+defmodule LiveViewUI.UI.Badge do
   @moduledoc """
   A simple badge component for displaying small labels or tags.
 
@@ -38,7 +38,7 @@ defmodule LiveViewUI.Badge do
   use Phoenix.Component
   use CVA.Component
 
-  import LiveViewUI.Helper
+  import LiveViewUI.UI.Helper
 
   variant(
     :variant,

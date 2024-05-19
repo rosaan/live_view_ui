@@ -25,12 +25,7 @@ defmodule Mix.Tasks.LiveViewUi.Prerelease do
 
     content = File.read!(source_path)
 
-    updated_content =
-      if Regex.scan(~r/LiveViewUI\.UI/, content) != [] do
-        Regex.replace(~r/LiveViewUI\.UI/, content, "<%= @module_name %>.UI")
-      else
-        Regex.replace(~r/LiveViewUI/, content, "<%= @module_name %>.UI")
-      end
+    updated_content = String.replace(content, "LiveViewUI", "<%= @module_name %>")
 
     File.write!(destination_path, updated_content)
     Mix.shell().info("Processed #{file}")

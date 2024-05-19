@@ -1,4 +1,4 @@
-defmodule LiveViewUI.Helper do
+defmodule LiveViewUI.UI.Helper do
   @moduledoc """
   Provides utility functions for handling UI elements within LiveView components.
   """
@@ -12,7 +12,7 @@ defmodule LiveViewUI.Helper do
 
   ## Examples
 
-      iex> LiveViewUI.cn(["button", "active", "button"])
+      iex> LiveViewUI.UI.cn(["button", "active", "button"])
       "active button"
 
   ## Returns
@@ -32,7 +32,7 @@ defmodule LiveViewUI.Helper do
   ## Examples
 
       # Example of a typical unique identifier output
-      iex> id = LiveViewUI.unique_id()
+      iex> id = LiveViewUI.UI.unique_id()
       iex> String.starts_with?(id, "LV")
       true
       iex> byte_size(id)
