@@ -22,6 +22,7 @@ defmodule LiveViewUI.Avatar do
 
   import LiveViewUI.Helper
 
+  attr :id, :string, required: true
   attr :class, :any, default: nil
   attr :rest, :global
   slot :inner_block, required: true
@@ -29,7 +30,7 @@ defmodule LiveViewUI.Avatar do
   def root(assigns) do
     ~H"""
     <div
-      id={unique_id()}
+      id={"avatar-#{@id}"}
       class={
         cn([
           "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",

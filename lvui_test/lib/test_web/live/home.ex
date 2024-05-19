@@ -60,7 +60,7 @@ defmodule TestWeb.HomeLive do
               </Accordion.content>
             </Accordion.item>
           </Accordion.root>
-          <Card.footer>
+          <Card.footer class="justify-end">
             <Button.root phx-click="update-title">Update Title</Button.root>
           </Card.footer>
         </Card.content>
@@ -90,13 +90,15 @@ defmodule TestWeb.HomeLive do
           </Card.title>
         </Card.header>
         <Card.content>
-          <Avatar.root>
-            <Avatar.image src={@image} />
-            <Avatar.fallback>
-              AV
-            </Avatar.fallback>
-          </Avatar.root>
-          <Card.footer>
+          <div class="flex -space-x-2 isolate">
+            <Avatar.root :for={i <- 1..10} id={"#{i}"} class="ring-1 ring-ring">
+              <Avatar.image src={@image} />
+              <Avatar.fallback>
+                AV
+              </Avatar.fallback>
+            </Avatar.root>
+          </div>
+          <Card.footer class="justify-end">
             <Button.root phx-click="inject-image">Update Image</Button.root>
           </Card.footer>
         </Card.content>
@@ -114,8 +116,12 @@ defmodule TestWeb.HomeLive do
     {:noreply, socket |> assign(accordion_title: Enum.random(random_names))}
   end
 
-
   def handle_event("inject-image", _payload, socket) do
-    {:noreply, socket |> assign(image: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
+    {:noreply,
+     socket
+     |> assign(
+       image:
+         "https://images.unsplash.com/photo-1575936123452-b67c3203c357?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+     )}
   end
 end

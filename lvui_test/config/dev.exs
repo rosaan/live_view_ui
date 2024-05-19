@@ -48,8 +48,7 @@ config :test, TestWeb.Endpoint,
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/test_web/(controllers|live|components)/.*(ex|heex)$",
-      ~r"../../../lib/ui/.*(ex|heex)$"
+      ~r"lib/test_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
 
