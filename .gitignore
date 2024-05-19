@@ -28,3 +28,4 @@ live_view_ui-*.tar
 .elixir_ls
 
 node_modules
+priv/templates
