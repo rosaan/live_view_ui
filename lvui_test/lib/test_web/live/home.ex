@@ -103,6 +103,19 @@ defmodule TestWeb.HomeLive do
           </Card.footer>
         </Card.content>
       </Card.root>
+
+      <Card.root>
+        <Card.header>
+          <Card.title>
+            Badge
+          </Card.title>
+        </Card.header>
+        <Card.content>
+          <Badge.root>
+            Hello
+          </Badge.root>
+        </Card.content>
+      </Card.root>
     </div>
     """
   end

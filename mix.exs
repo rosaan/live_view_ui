@@ -41,7 +41,7 @@ defmodule LiveViewUI.MixProject do
       # UI related
       {:phoenix_live_view, "~> 0.18"},
       {:lucide_live_view, "~> 0.1.0"},
-      {:tails, "~> 0.1.10"},
+      {:tails, "~> 0.1.11"},
       {:cva, "~> 0.2"},
       {:gettext, "~> 0.20"},
       {:esbuild, "~> 0.8.1"},

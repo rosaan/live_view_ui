@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :tails, colors_file: Path.join(File.cwd!(), "../assets/tailwind.colors.json")
+
 config :test,
   generators: [timestamp_type: :utc_datetime]
 

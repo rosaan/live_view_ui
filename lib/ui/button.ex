@@ -1,6 +1,48 @@
 defmodule LiveViewUI.Button do
   @moduledoc """
-  A simple button component.
+  A simple button component for interactive actions.
+
+  ## Example Usage
+
+  Here is a basic example of setting up a button component:
+
+  ```elixir
+  <Button.root>
+    Default Button
+  </Button.root>
+  ```
+
+  You can customize the button with different variants, sizes, and HTML elements:
+
+  ```elixir
+  <Button.root variant="destructive" size="lg" as="a" class="extra-class">
+    Destructive Button
+  </Button.root>
+  ```
+
+  ## Attributes
+
+  - `:variant` - The style variant of the button. Available options:
+    - `:default` (default)
+    - `:destructive`
+    - `:outline`
+    - `:outline-secondary`
+    - `:secondary`
+    - `:ghost`
+    - `:link`
+  - `:size` - The size of the button. Available options:
+    - `:default` (default)
+    - `:sm`
+    - `:lg`
+    - `:icon`
+  - `:type` - The button type attribute (e.g., `"button"`, `"submit"`).
+  - `:class` - Additional CSS classes to apply to the button.
+  - `:as` - The HTML element to use for the button. Default is `"button"` or can be `"a"`.
+  - `:rest` - Any additional attributes to apply to the button's root element, including `disabled`, `form`, `name`, and `value`.
+
+  ## Slots
+
+  - `:inner_block` - The content to be displayed inside the button.
   """
   use Phoenix.Component
   use CVA.Component
@@ -52,7 +94,7 @@ defmodule LiveViewUI.Button do
   attr(:size, :string, default: "default", values: @button_size)
   attr(:type, :string, default: nil)
   attr(:class, :any, default: nil)
-  attr(:as, :string, default: "button", values: ["button", "a", "li"])
+  attr(:as, :string, default: "button", values: ["button", "a"])
   attr(:rest, :global, include: ~w(disabled form name value))
 
   slot(:inner_block, required: true)

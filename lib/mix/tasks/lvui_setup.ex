@@ -31,6 +31,10 @@ defmodule Mix.Tasks.LiveViewUi.Setup do
   end
 
   defp inject_tailwind_config do
+    # Step 1: Copy the tailwind.colors.json file
+    copy_tailwind_colors()
+
+    # Step 2: Inject the Tailwind configuration
     file = "assets/tailwind.config.js"
 
     patterns = [
@@ -41,6 +45,9 @@ defmodule Mix.Tasks.LiveViewUi.Setup do
 
     inject_patterns(file, patterns)
     inject_colors(file)
+
+    # Step 3: Inject the config into config.exs
+    inject_config()
   end
 
   defp update_app_css do
@@ -112,6 +119,14 @@ defmodule Mix.Tasks.LiveViewUi.Setup do
     File.write!(file, updated_contents)
   end
 
+  defp copy_tailwind_colors do
+    source = Application.app_dir(:live_view_ui, "priv/templates/tailwind.colors.json")
+    destination = "assets/tailwind.colors.json"
+
+    File.cp!(source, destination)
+    Mix.shell().info("Copied tailwind.colors.json")
+  end
+
   defp inject_colors(file) do
     if File.exists?(file) do
       contents = File.read!(file)
@@ -138,7 +153,7 @@ defmodule Mix.Tasks.LiveViewUi.Setup do
   end
 
   defp ensure_colors(contents) do
-    color_pattern = ~r/require\("\.\.\/deps\/live_view_ui\/assets\/tailwind\.colors\.json"\)/
+    color_pattern = ~r/require\("\.\/tailwind\.colors\.json"\)/
 
     if Regex.match?(color_pattern, contents) do
       contents
@@ -147,16 +162,27 @@ defmodule Mix.Tasks.LiveViewUi.Setup do
         Regex.replace(
           ~r/(colors:\s*\{)([^}]*)\}/,
           contents,
-          "\\1\n        ...require(\"../deps/live_view_ui/assets/tailwind.colors.json\"),\\2}"
+          "\\1\n        ...require(\"./tailwind.colors.json\"),\\2}"
         )
       else
         Regex.replace(
           ~r/(extend:\s*\{)([^}]*)\}/,
           contents,
-          "\\1\n      colors: {\n        ...require(\"../deps/live_view_ui/assets/tailwind.colors.json\")\n      },\\2}"
+          "\\1\n      colors: {\n        ...require(\"./tailwind.colors.json\")\n      },\\2}"
         )
       end
     end
+  end
+
+  defp inject_config do
+    file = "config/config.exs"
+    pattern = ~r/import Config/
+
+    line = """
+    config :tails, colors_file: Path.join(File.cwd!(), "assets/tailwind.colors.json")
+    """
+
+    inject_line(file, pattern, line, :after)
   end
 
   defp inject_patterns(file, patterns) do

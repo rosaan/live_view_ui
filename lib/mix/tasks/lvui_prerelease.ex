@@ -15,6 +15,8 @@ defmodule Mix.Tasks.LiveViewUi.Prerelease do
     source
     |> File.ls!()
     |> Enum.each(&process_file(&1, source, destination))
+
+    copy_tailwind_colors()
   end
 
   defp process_file(file, source, destination) do
@@ -32,5 +34,13 @@ defmodule Mix.Tasks.LiveViewUi.Prerelease do
 
     File.write!(destination_path, updated_content)
     Mix.shell().info("Processed #{file}")
+  end
+
+  defp copy_tailwind_colors do
+    source = "assets/tailwind.colors.json"
+    destination = "priv/templates/tailwind.colors.json"
+
+    File.cp!(source, destination)
+    Mix.shell().info("Copied tailwind.colors.json")
   end
 end
