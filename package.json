@@ -1,15 +1,10 @@
 {
     "name": "live_view_ui",
     "version": "0.0.7",
-    "main": "./priv/static/plugin.js",
     "module": "./priv/static/live_view_ui.mjs",
     "exports": {
-        ".": {
-            "import": "./priv/static/live_view_ui.mjs"
-        },
-        "./tailwind": {
-            "require": "./priv/static/plugin.js"
-        }
+        ".": "./priv/static/live_view_ui.mjs",
+        "./tailwind": "./priv/static/plugin.js"
     },
     "files": [
         "README.md",
