@@ -69,8 +69,8 @@ defmodule LiveViewUI.MixProject do
 
   defp aliases do
     [
-      publish: ["prerelease", "hex.publish"],
-      "publish:replace": ["prerelease", "hex.publish --replace"],
+      publish: ["lvui.prerelease", "hex.publish"],
+      "publish:replace": ["lvui.prerelease", "hex.publish --replace"],
       "assets.build": [
         "cmd --cd priv rm -rf static/",
         "esbuild default",
