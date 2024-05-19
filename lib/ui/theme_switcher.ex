@@ -1,6 +1,16 @@
 defmodule LiveViewUI.UI.ThemeSwitcher do
   @moduledoc """
-  A module that provides a way to switch between dark mode and light mode.
+  A component that provides a way to switch between dark mode and light mode.
+
+  ## Example Usage
+
+  Here is a basic example of setting up the theme switcher component:
+
+  ```elixir
+  <ThemeSwitcher.root />
+  ```
+
+  Place this component in your layout or any other part of your application where you want to provide a way to switch between themes.
   """
 
   use Phoenix.Component
