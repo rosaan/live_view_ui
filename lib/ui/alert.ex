@@ -7,7 +7,7 @@ defmodule LiveViewUI.UI.Alert do
   Here is a basic example of setting up an alert with a title and description:
 
   ```elixir
-  <Alert.root variant={:warning}>
+  <Alert.root variant="warning">
     <Lucide.terminal class="size-4" />
     <Alert.title>Heads up!</Alert.title>
     <Alert.description>
