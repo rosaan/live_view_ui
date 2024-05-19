@@ -17,7 +17,7 @@ Open your Phoenix project and add `live_view_ui` to your list of dependencies in
 ```elixir
 def deps do
   [
-    {:live_view_ui, "~> 0.0.5"}, # <-- Add this line
+    {:live_view_ui, "~> 0.0.6"}, # <-- Add this line
   ]
 end
 ```
