@@ -1,7 +1,7 @@
 defmodule LiveViewUI.MixProject do
   use Mix.Project
 
-  @version "0.0.3"
+  @version "0.0.4"
 
   def project do
     [
@@ -69,9 +69,8 @@ defmodule LiveViewUI.MixProject do
 
   defp aliases do
     [
-      prepublish: ["cp -r lib/ui priv/ui"],
-      publish: ["mix prepublish", "mix hex.publish"],
-      "publish:replace": ["mix prepublish", "mix hex.publish package"],
+      publish: ["prerelease", "hex.publish"],
+      "publish:replace": ["prerelease", "hex.publish --replace"],
       "assets.build": [
         "cmd --cd priv rm -rf static/",
         "esbuild default",

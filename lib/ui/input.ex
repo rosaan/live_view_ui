@@ -1,11 +1,11 @@
-defmodule Input do
+defmodule LiveViewUI.Input do
   @moduledoc """
   A simple input component.
   """
   use Phoenix.Component
   use CVA.Component
 
-  import LiveViewUI
+  import LiveViewUI.Helper
 
   attr(:id, :any, default: nil)
   attr(:name, :any)
@@ -49,7 +49,7 @@ defmodule Input do
 
     ~H"""
     <div phx-feedback-for={@name}>
-      <Label.root for={@id} class={cn(["flex gap-x-2", @class])}>
+      <LiveViewUI.Label.root for={@id} class={cn(["flex gap-x-2", @class])}>
         <input
           type="checkbox"
           id={@id}
@@ -65,8 +65,8 @@ defmodule Input do
           {@rest}
         />
         <%= render_slot(@inner_block) %>
-      </Label.root>
-      <Error.root :for={msg <- @errors}><%= msg %></Error.root>
+      </LiveViewUI.Label.root>
+      <LiveViewUI.Error.root :for={msg <- @errors}><%= msg %></LiveViewUI.Error.root>
     </div>
     """
   end
@@ -74,7 +74,7 @@ defmodule Input do
   def root(%{type: "select"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
-      <Label.root for={@id}><%= @label %></Label.root>
+      <LiveViewUI.Label.root for={@id}><%= @label %></LiveViewUI.Label.root>
       <select
         id={@id}
         name={@name}
@@ -94,7 +94,7 @@ defmodule Input do
         <%= Phoenix.HTML.Form.options_for_select(@options, @value) %>
       </select>
 
-      <Error.root :for={msg <- @errors}><%= msg %></Error.root>
+      <LiveViewUI.Error.root :for={msg <- @errors}><%= msg %></LiveViewUI.Error.root>
     </div>
     """
   end
@@ -102,7 +102,7 @@ defmodule Input do
   def root(%{type: "textarea"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
-      <Label.root for={@id}><%= @label %></Label.root>
+      <LiveViewUI.Label.root for={@id}><%= @label %></LiveViewUI.Label.root>
       <textarea
         id={@id}
         name={@name}
@@ -116,7 +116,7 @@ defmodule Input do
         }
         {@rest}
       ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
-      <Error.root :for={msg <- @errors}><%= msg %></Error.root>
+      <LiveViewUI.Error.root :for={msg <- @errors}><%= msg %></LiveViewUI.Error.root>
     </div>
     """
   end
@@ -124,7 +124,7 @@ defmodule Input do
   def root(%{type: "url-slug"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
-      <Label.root for={@id}><%= @label %></Label.root>
+      <LiveViewUI.Label.root for={@id}><%= @label %></LiveViewUI.Label.root>
       <div class="flex mt-1.5">
         <div class={
           cn([
@@ -161,7 +161,7 @@ defmodule Input do
           <span class="text-sm text-muted">perkz.my</span>
         </div>
       </div>
-      <Error.root :for={msg <- @errors}><%= msg %></Error.root>
+      <LiveViewUI.Error.root :for={msg <- @errors}><%= msg %></LiveViewUI.Error.root>
     </div>
     """
   end
@@ -170,7 +170,7 @@ defmodule Input do
   def root(assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
-      <Label.root for={@id}><%= @label %></Label.root>
+      <LiveViewUI.Label.root for={@id}><%= @label %></LiveViewUI.Label.root>
       <input
         type={@type}
         name={@name}
@@ -187,7 +187,7 @@ defmodule Input do
         }
         {@rest}
       />
-      <Error.root :for={msg <- @errors}><%= msg %></Error.root>
+      <LiveViewUI.Error.root :for={msg <- @errors}><%= msg %></LiveViewUI.Error.root>
     </div>
     """
   end

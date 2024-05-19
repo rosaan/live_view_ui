@@ -1,4 +1,4 @@
-defmodule Error do
+defmodule LiveViewUI.Error do
   @moduledoc """
   A simple error component.
   """

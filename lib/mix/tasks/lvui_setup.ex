@@ -51,7 +51,7 @@ defmodule Mix.Tasks.Lvui.Setup do
   end
 
   defp copy_ui_components do
-    ui_dir = Application.app_dir(:live_view_ui, "priv/ui")
+    ui_dir = Application.app_dir(:live_view_ui, "priv/templates/ui")
     current_ui_dir = Path.join(["lib", "ui"])
     Mix.shell().info("Copying UI components...")
     File.cp_r!(ui_dir, current_ui_dir)

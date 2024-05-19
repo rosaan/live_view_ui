@@ -1,11 +1,11 @@
-defmodule Alert do
+defmodule LiveViewUI.Alert do
   @moduledoc """
   A simple alert component.
   """
   use Phoenix.Component
   use CVA.Component
 
-  import LiveViewUI
+  import LiveViewUI.Helper
 
   variant(
     :variant,

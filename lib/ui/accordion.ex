@@ -1,4 +1,4 @@
-defmodule Accordion do
+defmodule LiveViewUI.Accordion do
   @moduledoc """
   A simple accordion component for dynamically displaying collapsible content panels.
 
@@ -35,7 +35,7 @@ defmodule Accordion do
   """
   use Phoenix.Component
 
-  import LiveViewUI
+  import LiveViewUI.Helper
 
   attr :multiple, :boolean, default: false
   attr :class, :any, default: nil

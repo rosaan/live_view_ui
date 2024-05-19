@@ -1,10 +1,10 @@
-defmodule Card do
+defmodule LiveViewUI.Card do
   @moduledoc """
   A simple card component.
   """
   use Phoenix.Component
 
-  import LiveViewUI
+  import LiveViewUI.Helper
 
   attr(:class, :any, default: nil)
   attr(:rest, :global)

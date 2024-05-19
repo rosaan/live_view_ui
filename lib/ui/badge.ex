@@ -1,11 +1,11 @@
-defmodule Badge do
+defmodule LiveViewUI.Badge do
   @moduledoc """
   A simple badge component.
   """
   use Phoenix.Component
   use CVA.Component
 
-  import LiveViewUI
+  import LiveViewUI.Helper
 
   variant(
     :variant,

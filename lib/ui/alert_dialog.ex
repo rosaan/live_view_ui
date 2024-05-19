@@ -1,10 +1,10 @@
-defmodule AlertDialog do
+defmodule LiveViewUI.AlertDialog do
   @moduledoc """
   A simple alert dialog component.
   """
   use Phoenix.Component
 
-  import LiveViewUI
+  import LiveViewUI.Helper
 
   @doc """
   Renders an alert dialog
@@ -51,15 +51,15 @@ defmodule AlertDialog do
   end
 
   attr(:trigger, :string, required: true)
-  attr(:variant, :string, default: "default", values: Button.get_button_variant())
-  attr(:size, :string, default: "default", values: Button.get_button_size())
+  attr(:variant, :string, default: "default", values: LiveViewUI.Button.get_button_variant())
+  attr(:size, :string, default: "default", values: LiveViewUI.Button.get_button_size())
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
 
   def trigger(assigns) do
     ~H"""
-    <Button.root
+    <LiveViewUI.Button.root
       data-hs-overlay={"##{@trigger}"}
       variant={@variant}
       size={@size}
@@ -67,7 +67,7 @@ defmodule AlertDialog do
       {@rest}
     >
       <%= render_slot(@inner_block) %>
-    </Button.root>
+    </LiveViewUI.Button.root>
     """
   end
 
@@ -185,16 +185,16 @@ defmodule AlertDialog do
     """
   end
 
-  attr(:variant, :string, default: "default", values: Button.get_button_variant())
+  attr(:variant, :string, default: "default", values: LiveViewUI.Button.get_button_variant())
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
 
   def action(assigns) do
     ~H"""
-    <Button.root variant={@variant} class={cn([@class])} {@rest}>
+    <LiveViewUI.Button.root variant={@variant} class={cn([@class])} {@rest}>
       <%= render_slot(@inner_block) %>
-    </Button.root>
+    </LiveViewUI.Button.root>
     """
   end
 
@@ -204,9 +204,9 @@ defmodule AlertDialog do
 
   def cancel(assigns) do
     ~H"""
-    <Button.root variant="outline" class={cn(["mt-2 sm:mt-0", @class])} {@rest}>
+    <LiveViewUI.Button.root variant="outline" class={cn(["mt-2 sm:mt-0", @class])} {@rest}>
       <%= render_slot(@inner_block) %>
-    </Button.root>
+    </LiveViewUI.Button.root>
     """
   end
 end

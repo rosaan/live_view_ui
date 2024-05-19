@@ -1,11 +1,11 @@
-defmodule Button do
+defmodule LiveViewUI.Button do
   @moduledoc """
   A simple button component.
   """
   use Phoenix.Component
   use CVA.Component
 
-  import LiveViewUI
+  import LiveViewUI.Helper
 
   @button_variant_config [
     default: "bg-primary text-primary-foreground hover:bg-primary/90",
