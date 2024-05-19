@@ -116,6 +116,29 @@ defmodule TestWeb.HomeLive do
           </Badge.root>
         </Card.content>
       </Card.root>
+
+      <Card.root>
+        <Card.header>
+          <Card.title>
+            Form
+          </Card.title>
+        </Card.header>
+        <Card.content class="space-y-4">
+          <Input.root type="text" name="name" id="name" label="Name" value="" />
+          <Input.root
+            type="select"
+            name="select"
+            id="select"
+            label="Select"
+            options={["Option 1", "Option 2"]}
+            value=""
+          />
+          <Input.root type="textarea" name="textarea" id="textarea" label="TextArea" value="" />
+          <Input.root type="checkbox" name="checkbox" id="checkbox" label="Checkbox" checked={false}>
+              Accept terms and conditions
+          </Input.root>
+        </Card.content>
+      </Card.root>
     </div>
     """
   end

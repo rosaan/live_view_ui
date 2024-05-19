@@ -1,4 +1,4 @@
-defmodule Input do
+defmodule LiveViewUI.UI.Input do
   @moduledoc """
   A simple input component.
   """
@@ -18,7 +18,7 @@ defmodule Input do
   attr(:type, :string,
     default: "text",
     values: ~w(checkbox color date datetime-local email file hidden month number password
-               range radio search select tel text textarea time url week url-slug)
+               range radio search select tel text textarea time url week)
   )
 
   attr(:field, Phoenix.HTML.FormField, doc: "a form field struct retrieved from the form, for example: @form[:email]")
@@ -52,7 +52,7 @@ defmodule Input do
 
     ~H"""
     <div phx-feedback-for={@name}>
-      <Label.root for={@id} class={cn(["flex gap-x-2", @class])}>
+      <div class="flex">
         <input
           type="checkbox"
           id={@id}
@@ -61,14 +61,17 @@ defmodule Input do
           checked={@checked}
           class={
             cn([
-              "w-4 h-4 border rounded-sm accent-current focus-visible:ring-ring peer shrink-0 border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+              "shrink-0 size-4 border rounded-sm accent-current focus-visible:ring-ring peer border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
               @class
             ])
           }
           {@rest}
         />
-        <%= render_slot(@inner_block) %>
-      </Label.root>
+
+        <Label.root for={@id} class={cn(["text-sm ms-2.5 select-none"])}>
+          <%= render_slot(@inner_block) %>
+        </Label.root>
+      </div>
       <Error.root :for={msg <- @errors}><%= msg %></Error.root>
     </div>
     """
@@ -83,8 +86,8 @@ defmodule Input do
         name={@name}
         class={
           cn([
-            "flex items-center justify-between w-full h-10 px-3 pl-4 pr-8 mt-1.5 text-sm border rounded-md border-input bg-card ring-offset-background placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-foreground focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
-            "phx-no-feedback:muted phx-no-feedback:focus:border-muted w-fit",
+            "py-3 px-4 pe-9 block w-full items-center justify-between mt-1.5 text-sm border rounded-md border-input bg-card ring-offset-background placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-foreground focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
+            "phx-no-feedback:muted phx-no-feedback:focus:border-muted",
             @errors == [] && "border-muted focus:border-muted",
             @errors != [] && "border-destructive focus:border-destructive",
             @class
@@ -111,7 +114,7 @@ defmodule Input do
         name={@name}
         class={
           cn([
-            "border-input mt-1.5 placeholder:text-muted focus-visible:ring-foreground flex min-h-[80px] w-full rounded-md border bg-card px-4 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+            "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 mt-1.5 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
             @errors == [] && "border-muted focus:border-muted",
             @errors != [] && "border-destructive focus:border-destructive",
             @class
@@ -119,51 +122,6 @@ defmodule Input do
         }
         {@rest}
       ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
-      <Error.root :for={msg <- @errors}><%= msg %></Error.root>
-    </div>
-    """
-  end
-
-  def root(%{type: "url-slug"} = assigns) do
-    ~H"""
-    <div phx-feedback-for={@name}>
-      <Label.root for={@id}><%= @label %></Label.root>
-      <div class="flex mt-1.5">
-        <div class={
-          cn([
-            "inline-flex items-center h-10 border  min-w-fit rounded-s-md border-e-0 bg-background px-4 py-2 select-none",
-            @errors == [] && "border-muted focus:border-muted",
-            @errors != [] && "border-destructive focus:border-destructive"
-          ])
-        }>
-          <span class="text-sm text-muted">https://</span>
-        </div>
-        <input
-          type={@type}
-          name={@name}
-          id={@id}
-          value={Phoenix.HTML.Form.normalize_value(@type, @value)}
-          class={
-            cn([
-              "placeholder:text-muted focus-visible:ring-foreground min-w-fit h-10 w-full border bg-card px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
-              "phx-no-feedback:muted phx-no-feedback:focus:border-muted",
-              @errors == [] && "border-muted focus:border-muted",
-              @errors != [] && "border-destructive focus:border-destructive",
-              @class
-            ])
-          }
-          {@rest}
-        />
-        <div class={
-          cn([
-            "inline-flex items-center w-full px-4 border rounded-e-md border-s-0 bg-background select-none",
-            @errors == [] && "border-muted focus:border-muted",
-            @errors != [] && "border-destructive focus:border-destructive"
-          ])
-        }>
-          <span class="text-sm text-muted">perkz.my</span>
-        </div>
-      </div>
       <Error.root :for={msg <- @errors}><%= msg %></Error.root>
     </div>
     """
@@ -181,7 +139,7 @@ defmodule Input do
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={
           cn([
-            "border-input placeholder:text-muted focus-visible:ring-foreground flex mt-1.5 h-10 w-full rounded-md border bg-card px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
+            "border-input placeholder:text-muted focus-visible:ring-foreground block mt-1.5 w-full rounded-md border bg-card px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
             "phx-no-feedback:muted phx-no-feedback:focus:border-muted",
             @errors == [] && "border-muted focus:border-muted",
             @errors != [] && "border-destructive focus:border-destructive",
