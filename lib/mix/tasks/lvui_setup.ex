@@ -51,10 +51,33 @@ defmodule Mix.Tasks.Lvui.Setup do
   end
 
   defp copy_ui_components do
+    otp_app = Mix.Phoenix.context_app()
+    module_name = otp_app |> Atom.to_string() |> Macro.camelize()
     ui_dir = Application.app_dir(:live_view_ui, "priv/templates/ui")
     current_ui_dir = Path.join(["lib", "ui"])
+
     Mix.shell().info("Copying UI components...")
-    File.cp_r!(ui_dir, current_ui_dir)
+
+    if File.exists?(current_ui_dir) do
+      Mix.shell().info("UI components already exist in lib/ui. Skipping.")
+      File.mkdir_p!(current_ui_dir)
+    end
+
+    Enum.each(File.ls!(ui_dir), fn file ->
+      if File.exists?(Path.join([current_ui_dir, file])) do
+        Mix.shell().info("File #{file} already exists in lib/ui. Skipping.")
+      else
+        file_path = Path.join([ui_dir, file])
+        file_content = File.read!(file_path)
+
+        new_content =
+          String.replace(file_content, "<%= @module_name %>", module_name)
+
+        new_file_path = Path.join([current_ui_dir, file])
+        File.write!(new_file_path, new_content)
+      end
+    end)
+
     Mix.shell().info("UI components copied.")
   end
 

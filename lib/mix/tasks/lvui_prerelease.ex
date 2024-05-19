@@ -22,7 +22,7 @@ defmodule Mix.Tasks.Lvui.Prerelease do
     destination_path = Path.join(destination, file)
 
     content = File.read!(source_path)
-    updated_content = String.replace(content, "LiveViewUI", "<%= @module_name %>")
+    updated_content = String.replace(content, "LiveViewUI", "<%= @module_name %>.UI")
 
     File.write!(destination_path, updated_content)
     Mix.shell().info("Processed #{file}")
