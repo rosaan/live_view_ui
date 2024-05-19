@@ -1,9 +1,21 @@
-defmodule Mix.Tasks.Lvui.Setup do
+defmodule Mix.Tasks.LiveViewUi.Setup do
   @shortdoc "Sets up LiveViewUI in your Phoenix project"
   @moduledoc false
   use Mix.Task
 
   def run(_) do
+    if File.exists?(".git") do
+      {result, _exit_code} = System.cmd("git", ["diff", "--exit-code"])
+
+      if result != "" do
+        Mix.shell().error(
+          "There are uncommitted changes in your git repository. Please commit or stash them before running this task."
+        )
+
+        System.halt(1)
+      end
+    end
+
     Mix.shell().info("Welcome to the LiveViewUI setup!")
 
     inject_tailwind_config()
@@ -94,6 +106,10 @@ defmodule Mix.Tasks.Lvui.Setup do
     """
 
     inject_line(file, ~r/<\/body>/, script, :before)
+
+    contents = File.read!(file)
+    updated_contents = Regex.replace(~r/\bbg-\S*/, contents, "bg-background")
+    File.write!(file, updated_contents)
   end
 
   defp inject_colors(file) do

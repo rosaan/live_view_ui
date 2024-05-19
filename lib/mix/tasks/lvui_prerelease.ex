@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Lvui.Prerelease do
+defmodule Mix.Tasks.LiveViewUi.Prerelease do
   @shortdoc "Sets up LiveViewUI in your Phoenix project"
   @shortdoc "Copies files from lib/ui to priv/templates/ui and replaces LiveViewUI with <%= @module_name %>"
 
@@ -22,7 +22,13 @@ defmodule Mix.Tasks.Lvui.Prerelease do
     destination_path = Path.join(destination, file)
 
     content = File.read!(source_path)
-    updated_content = String.replace(content, "LiveViewUI", "<%= @module_name %>.UI")
+
+    updated_content =
+      if Regex.scan(~r/LiveViewUI\.UI/, content) != [] do
+        Regex.replace(~r/LiveViewUI\.UI/, content, "<%= @module_name %>.UI")
+      else
+        Regex.replace(~r/LiveViewUI/, content, "<%= @module_name %>.UI")
+      end
 
     File.write!(destination_path, updated_content)
     Mix.shell().info("Processed #{file}")

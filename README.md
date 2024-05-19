@@ -29,7 +29,7 @@ Run `mix deps.get` to fetch and install the dependencies.
 Run the following mix command to copy and install the necessary assets:
 
 ```bash
-mix lvui.setup
+mix live_view_ui.setup
 ```
 
 # Usage
