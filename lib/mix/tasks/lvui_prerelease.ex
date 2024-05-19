@@ -25,7 +25,10 @@ defmodule Mix.Tasks.LiveViewUi.Prerelease do
 
     content = File.read!(source_path)
 
-    updated_content = String.replace(content, "LiveViewUI", "<%= @module_name %>")
+    updated_content =
+      content
+      |> String.replace("LiveViewUI", "<%= @module_name %>")
+      |> String.replace("UI.Gettext", "<%= @gettext %>")
 
     File.write!(destination_path, updated_content)
     Mix.shell().info("Processed #{file}")

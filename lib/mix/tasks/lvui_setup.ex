@@ -88,9 +88,12 @@ defmodule Mix.Tasks.LiveViewUi.Setup do
       else
         file_path = Path.join([ui_dir, file])
         file_content = File.read!(file_path)
+        gettext_module = "#{module_name}Web.Gettext"
 
         new_content =
-          String.replace(file_content, "<%= @module_name %>", module_name)
+          file_content
+          |> String.replace("<%= @module_name %>", module_name)
+          |> String.replace("<%= @gettext %>", gettext_module)
 
         new_file_path = Path.join([current_ui_dir, file])
         File.write!(new_file_path, new_content)
