@@ -1,7 +1,101 @@
 defmodule LiveViewUI.UI.Input do
   @moduledoc """
-  A simple input component.
+  A simple input component for various form fields.
+
+  ## Example Usage
+
+  Here is a basic example of setting up a text input component:
+
+  ```elixir
+  <Input.root name="username" label="Username" />
+  ```
+
+  You can customize the input with different types, labels, and other attributes:
+
+  ### Text Input
+  ```elixir
+  <Input.root type="text" name="username" label="Username" />
+  ```
+
+  ### Email Input
+  ```elixir
+  <Input.root type="email" name="user_email" label="Email" value="user@example.com" />
+  ```
+
+  ### Password Input
+  ```elixir
+  <Input.root type="password" name="password" label="Password" />
+  ```
+
+  ### Number Input
+  ```elixir
+  <Input.root type="number" name="quantity" label="Quantity" />
+  ```
+
+  ### Checkbox Input
+  ```elixir
+  <Input.root type="checkbox" name="agree" label="I Agree">
+    I agree to the terms and conditions
+  </Input.root>
+  ```
+
+  ### Select Input
+  ```elixir
+  <Input.root type="select" name="country" label="Country" options={["USA", "Canada", "Mexico"]} prompt="Select a country" />
+  ```
+
+  ### Textarea Input
+  ```elixir
+  <Input.root type="textarea" name="description" label="Description" />
+  ```
+
+  ### Radio Input
+  ```elixir
+  <Input.root type="radio" name="gender" label="Male" value="male" />
+  <Input.root type="radio" name="gender" label="Female" value="female" />
+  ```
+
+  ### Date Input
+  ```elixir
+  <Input.root type="date" name="birthday" label="Birthday" />
+  ```
+
+  ### Time Input
+  ```elixir
+  <Input.root type="time" name="appointment_time" label="Appointment Time" />
+  ```
+
+  ### URL Input
+  ```elixir
+  <Input.root type="url" name="website" label="Website" />
+  ```
+
+  ## Attributes
+
+  - `:id` - The ID of the input element. Defaults to the field ID if not provided.
+  - `:name` - The name of the input element.
+  - `:label` - The label text for the input element.
+  - `:value` - The value of the input element.
+  - `:type` - The type of the input element. Default is `"text"`. Available options include:
+    - `"checkbox"`, `"color"`, `"date"`, `"datetime-local"`, `"email"`, `"file"`, `"hidden"`, `"month"`, `"number"`, `"password"`, `"radio"`, `"range"`, `"search"`, `"select"`, `"tel"`, `"text"`, `"textarea"`, `"time"`, `"url"`, `"week"`
+  - `:field` - A form field struct retrieved from the form (e.g., `@form[:email]`).
+  - `:errors` - A list of errors for the input element.
+  - `:checked` - The checked flag for checkbox inputs.
+  - `:prompt` - The prompt for select inputs.
+  - `:options` - The options to pass to `Phoenix.HTML.Form.options_for_select/2` for select inputs.
+  - `:multiple` - The multiple flag for select inputs. Default is `false`.
+  - `:class` - Additional CSS classes to apply to the input element.
+  - `:rest` - Any additional attributes to apply to the input element, including `accept`, `autocomplete`, `capture`, `cols`, `disabled`, `form`, `list`, `max`, `maxlength`, `min`, `minlength`, `multiple`, `pattern`, `placeholder`, `readonly`, `required`, `rows`, `size`, `step`.
+
+  ## Slots
+
+  - `:inner_block` - The content to be displayed inside the input element (e.g., label for checkbox).
+
+  ## Components
+
+  - `Input.root` - The main container for the input component.
   """
+
   use Phoenix.Component
   use CVA.Component
 
