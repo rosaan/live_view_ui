@@ -4,9 +4,9 @@ defmodule TestWeb.EmptyLive do
   def render(assigns) do
     ~H"""
     <div>
-    <Button.root>
-      <.link navigate={~p"/"}>Go back home</.link>
-    </Button.root>
+      <Button.root>
+        <.link navigate={~p"/"}>Go back home</.link>
+      </Button.root>
     </div>
     """
   end

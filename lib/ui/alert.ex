@@ -1,6 +1,22 @@
 defmodule LiveViewUI.Alert do
   @moduledoc """
-  A simple alert component.
+  A simple alert component for displaying important messages.
+
+  ## Example Usage
+
+  Here is a basic example of setting up an alert with a title and description:
+
+  ```elixir
+  <Alert.root variant={:warning}>
+    <Lucide.terminal class="size-4" />
+    <Alert.title>Heads up!</Alert.title>
+    <Alert.description>
+      You can add components to your app using the CLI.
+    </Alert.description>
+  </Alert.root>
+  ```
+
+  This structure allows you to create styled alert messages with customizable content.
   """
   use Phoenix.Component
   use CVA.Component

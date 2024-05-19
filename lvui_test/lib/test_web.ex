@@ -90,6 +90,8 @@ defmodule TestWeb do
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
 
+      use TestWeb.UI
+
       # Routes generation with the ~p sigil
       unquote(verified_routes())
     end

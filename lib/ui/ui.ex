@@ -5,6 +5,7 @@ defmodule LiveViewUI.UI do
       alias LiveViewUI.UI.Accordion
       alias LiveViewUI.UI.Alert
       alias LiveViewUI.UI.AlertDialog
+      alias LiveViewUI.UI.Avatar
       alias LiveViewUI.UI.Badge
       alias LiveViewUI.UI.Button
       alias LiveViewUI.UI.Card
