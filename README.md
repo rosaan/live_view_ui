@@ -8,23 +8,23 @@ Add free, easy-to-customize components to your LiveView apps. Start building you
 
 ### Prerequisites
 
-Make sure you have tailwindcss installed in your phoenix app.
+Ensure you have TailwindCSS installed in your Phoenix app.
 
-## Step 1: Add the Dependency
+### Step 1: Add the Dependency
 
 Open your Phoenix project and add `live_view_ui` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:live_view_ui, "~> 0.0.7"}, # <-- Add this line
+    {:live_view_ui, "~> 0.0.7"} # <-- Add this line
   ]
 end
 ```
 
 Run `mix deps.get` to fetch and install the dependencies.
 
-## Step 2: Setup
+### Step 2: Setup
 
 Run the following mix command to copy and install the necessary assets:
 
@@ -32,12 +32,29 @@ Run the following mix command to copy and install the necessary assets:
 mix live_view_ui.setup
 ```
 
-# Usage
+## Usage
 
 Refer to the [shadcn/ui Themes](https://ui.shadcn.com/themes) to customize the colors to your liking.
 
-# Acknowledgements
+## Troubleshooting
+
+### Error: Cannot find module 'live_view_ui/tailwind'
+
+If you encounter this error, follow these steps:
+
+1. Create a `package.json` file in the `assets/` directory.
+2. Add the following content to the `package.json` file:
+   ```json
+   {
+     "dependencies": {
+       "live_view_ui": "file:../deps/live_view_ui"
+     }
+   }
+   ```
+3. Run `npm install` or `bun install`.
+
+## Acknowledgements
 
 This project is inspired by [shadcn/ui](https://ui.shadcn.com/). Thank you for the amazing work you do!
 
-Thank you to [preline](https://preline.co/) for their amazing work on the plugins and components that make this library possible.
+Special thanks to [Preline](https://preline.co/) for their amazing work on the plugins and components that make this library possible.
